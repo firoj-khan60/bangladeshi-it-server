@@ -16,6 +16,7 @@
     "pull": "prisma db pull",
     "format": "prettier --write .",
     "build": "prisma generate && tsup src/index.ts --format esm --platform node --target node20 --outDir api --external pg-native",
+    "build:server": "prisma generate && tsup src/server.ts --format esm --platform node --target node22 --outDir dist --external pg-native",
     "postinstall": "prisma generate"
   },
   "keywords": [

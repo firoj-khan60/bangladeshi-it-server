@@ -8,6 +8,8 @@ import { SmsSettingRoutes } from "../module/sms-setting/smsSetting.route";
 import { PageContentRoutes } from "../module/page-content/pageContent.route";
 import { FaqRoutes } from "../module/faq/faq.route";
 import { BlogRoutes } from "../module/blog/blog.route";
+import { LeadRoutes } from "../module/lead/lead.route";
+import { ClientLogoRoutes } from "../module/client-logo/clientLogo.route";
 
 const router = Router();
 
@@ -20,5 +22,7 @@ router.use("/sms-settings", SmsSettingRoutes);
 router.use("/pages", PageContentRoutes);
 router.use("/faqs", FaqRoutes);
 router.use("/blogs", BlogRoutes);
+router.use("/leads", LeadRoutes);
+router.use("/client-logos", ClientLogoRoutes);
 
 export const IndexRoutes = router;

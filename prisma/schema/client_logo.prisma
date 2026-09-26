@@ -1,0 +1,12 @@
+// Client/brand logos shown in the home page marquee
+model ClientLogo {
+  id        String   @id @default(uuid())
+  name      String
+  image     String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("client_logos")
+}

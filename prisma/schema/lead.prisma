@@ -1,0 +1,30 @@
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+// Enquiries submitted from public landing pages / ad campaigns
+model Lead {
+  id           String     @id @default(uuid())
+  name         String
+  phone        String
+  email        String?
+  service      String
+  businessName String?
+  websiteUrl   String?
+  note         String?
+  // Which landing page the lead came from, e.g. "tracking-setup"
+  source       String?
+  // Ad attribution captured from the landing page URL
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  status       LeadStatus @default(NEW)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([status, createdAt])
+  @@map("leads")
+}

@@ -73,3 +73,19 @@ export const orderTrackRateLimiter = rateLimit({
     res.status(options.statusCode).json(options.message);
   },
 });
+
+// Public lead form on landing pages — a real visitor submits once or twice,
+// guard against scripted spam only
+export const leadSubmitRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 10, // Limit each IP to 10 lead submissions per 15 minutes
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many submissions, please try again later",
+  },
+  handler: (req, res, next, options) => {
+    res.status(options.statusCode).json(options.message);
+  },
+});

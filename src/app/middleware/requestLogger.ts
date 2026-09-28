@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 const logDir = path.resolve(process.cwd(), "logs");
 const DATED_LOG_PATTERN = /^access-(\d{4}-\d{2}-\d{2})\.log$/;
 
-// Optional — not part of the strict env loader so existing deployments
+// Optional - not part of the strict env loader so existing deployments
 // without it don't break. Defaults to a 7-day retention window.
 const RETENTION_DAYS = Number(process.env.LOG_RETENTION_DAYS) || 7;
 

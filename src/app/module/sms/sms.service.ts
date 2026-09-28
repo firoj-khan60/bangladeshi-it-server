@@ -10,7 +10,7 @@ const normalizePhone = (phone: string) => {
   return `88${digits}`;
 };
 
-// Best-effort — never throws, so a failed/unconfigured SMS never breaks the
+// Best-effort - never throws, so a failed/unconfigured SMS never breaks the
 // order flow that triggered it.
 const sendSms = async (phone: string, message: string) => {
   try {

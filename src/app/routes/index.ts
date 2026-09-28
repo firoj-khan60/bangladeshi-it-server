@@ -10,6 +10,7 @@ import { FaqRoutes } from "../module/faq/faq.route";
 import { BlogRoutes } from "../module/blog/blog.route";
 import { LeadRoutes } from "../module/lead/lead.route";
 import { ClientLogoRoutes } from "../module/client-logo/clientLogo.route";
+import { TestimonialRoutes } from "../module/testimonial/testimonial.route";
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use("/faqs", FaqRoutes);
 router.use("/blogs", BlogRoutes);
 router.use("/leads", LeadRoutes);
 router.use("/client-logos", ClientLogoRoutes);
+router.use("/testimonials", TestimonialRoutes);
 
 export const IndexRoutes = router;

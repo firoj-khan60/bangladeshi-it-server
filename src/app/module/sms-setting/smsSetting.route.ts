@@ -7,7 +7,7 @@ import { updateSmsSettingZodSchema } from "./smsSetting.validation";
 
 const router = Router();
 
-// Admin-only — holds a live API key, unlike shipping/payment settings the
+// Admin-only - holds a live API key, unlike shipping/payment settings the
 // storefront never needs to read this
 router.use(checkAuth(Role.ADMIN, Role.SUPER_ADMIN));
 

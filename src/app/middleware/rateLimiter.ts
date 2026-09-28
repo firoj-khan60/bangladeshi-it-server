@@ -27,7 +27,7 @@ export const authRateLimiter = rateLimit({
   },
 });
 
-// Guest (unauthenticated) order placement from public landing pages — abuse/spam guard
+// Guest (unauthenticated) order placement from public landing pages - abuse/spam guard
 export const guestOrderRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   limit: 20, // Limit each IP to 20 guest orders per 15 minutes
@@ -42,7 +42,7 @@ export const guestOrderRateLimiter = rateLimit({
   },
 });
 
-// Public abandoned-checkout autosave — one browser session sends a handful of
+// Public abandoned-checkout autosave - one browser session sends a handful of
 // these while filling the checkout form, guard against scripted spam only
 export const abandonedCheckoutTrackRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -58,7 +58,7 @@ export const abandonedCheckoutTrackRateLimiter = rateLimit({
   },
 });
 
-// Public order-tracking lookup (orderNumber + phone) — guards against brute-forcing
+// Public order-tracking lookup (orderNumber + phone) - guards against brute-forcing
 // the phone number for a known/guessed order number
 export const orderTrackRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -74,7 +74,7 @@ export const orderTrackRateLimiter = rateLimit({
   },
 });
 
-// Public lead form on landing pages — a real visitor submits once or twice,
+// Public lead form on landing pages - a real visitor submits once or twice,
 // guard against scripted spam only
 export const leadSubmitRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

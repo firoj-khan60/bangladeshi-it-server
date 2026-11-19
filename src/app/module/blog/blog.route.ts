@@ -33,7 +33,7 @@ router.get(
 router.post(
   "/",
   checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
-  multerUpload.single("coverImage"),
+  multerUpload.any(),
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
       req.body = JSON.parse(req.body.data);
@@ -47,7 +47,7 @@ router.post(
 router.patch(
   "/:id",
   checkAuth(Role.SUPER_ADMIN, Role.ADMIN),
-  multerUpload.single("coverImage"),
+  multerUpload.any(),
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
       req.body = JSON.parse(req.body.data);

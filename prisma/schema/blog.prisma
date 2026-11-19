@@ -3,7 +3,10 @@ model Blog {
   title       String
   slug        String   @unique
   excerpt     String?
+  // HTML generated from `blocks` (kept for search/RAG and for older posts)
   content     String
+  // Ordered content blocks: heading / text / image
+  blocks      Json?
   coverImage  String?
   author      String?
   isPublished Boolean  @default(false)

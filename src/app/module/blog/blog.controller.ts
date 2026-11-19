@@ -4,13 +4,36 @@ import { IQueryParams } from "../../interfaces/query.interface";
 import { catchAsync } from "../../shared/catchAsync";
 import { sendResponse } from "../../shared/sendResponse";
 import { BlogService } from "./blog.service";
+import { TBlogBlock } from "./blog.validation";
+
+const BLOCK_IMAGE_PREFIX = "blockImage_";
+
+/** Puts uploaded cover + block image URLs onto the parsed body. */
+const attachUploads = (req: Request) => {
+  const payload = { ...req.body };
+  const files = Array.isArray(req.files) ? req.files : [];
+
+  const cover = files.find((f) => f.fieldname === "coverImage");
+  if (cover) payload.coverImage = cover.path;
+
+  if (Array.isArray(payload.blocks)) {
+    const byBlockId = new Map(
+      files
+        .filter((f) => f.fieldname.startsWith(BLOCK_IMAGE_PREFIX))
+        .map((f) => [f.fieldname.slice(BLOCK_IMAGE_PREFIX.length), f.path]),
+    );
+    payload.blocks = payload.blocks.map((block: TBlogBlock) =>
+      block.type === "image" && byBlockId.has(block.id)
+        ? { ...block, url: byBlockId.get(block.id) }
+        : block,
+    );
+  }
+
+  return payload;
+};
 
 const createBlog = catchAsync(async (req: Request, res: Response) => {
-  const payload = { ...req.body };
-
-  if (req.file) {
-    payload.coverImage = req.file.path;
-  }
+  const payload = attachUploads(req);
 
   const result = await BlogService.createBlog(payload);
 
@@ -73,11 +96,7 @@ const getBlogBySlug = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateBlog = catchAsync(async (req: Request, res: Response) => {
-  const payload = { ...req.body };
-
-  if (req.file) {
-    payload.coverImage = req.file.path;
-  }
+  const payload = attachUploads(req);
 
   const result = await BlogService.updateBlog(
     req.params.id as string,
